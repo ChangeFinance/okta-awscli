@@ -148,15 +148,15 @@ class OktaAuthConfig():
 
     def write_role_to_profile(self, okta_profile, role_arn):
         """ Saves role to profile in config """
-        if not self._value.has_section(okta_profile):
-            self._value.add_section(okta_profile)
+        #if not self._value.has_section(okta_profile):
+        #    self._value.add_section(okta_profile)
 
-        base_url = self.base_url_for(okta_profile)
-        self._value.set(okta_profile, 'base-url', base_url)
-        self._value.set(okta_profile, 'role', role_arn)
+        #base_url = self.base_url_for(okta_profile)
+        #self._value.set(okta_profile, 'base-url', base_url)
+        #self._value.set(okta_profile, 'role', role_arn)
 
-        with open(self.config_path, 'w+') as configfile:
-            self._value.write(configfile)
+        #with open(self.config_path, 'w+') as configfile:
+            #self._value.write(configfile)
 
     def write_applink_to_profile(self, okta_profile, app_link):
         """ Saves app link to profile in config """
