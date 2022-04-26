@@ -4,7 +4,7 @@ echo Install infra packages...
 
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-brew install kubectl k9s git awscli helm thefuck fzf terraform kubectx wget eksctl 
+brew install kubectl k9s git awscli helm thefuck fzf terraform kubectx wget eksctl
 
 brew install zsh
 
@@ -77,7 +77,6 @@ duration = 28800
 EOF
 OKTA_EMAIL=$(echo $OKTA_EMAIL | sed 's/\@/\\\@/g')
 sed "s/_user_/$OKTA_EMAIL/g" ~/.okta > ~/.okta-aws
-rm -f ~/.okta
 
 echo Create AWS configs...
 mkdir -p ~/.aws
