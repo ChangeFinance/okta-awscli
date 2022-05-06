@@ -125,20 +125,29 @@ clusters:
     certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUM1ekNDQWMrZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJeU1ETXhOVEV3TWpNek9Gb1hEVE15TURNeE1qRXdNak16T0Zvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTVJ0Cm5mbzd6Rm5YRjBsN2M0VDlHZWpyVWpNUEsxSGNmeEVzc1lsWEtWQVluSzZLSUFIeU41MUFhVlhyeWJqSlZtSHcKc2IraTRYWndoRTNhWW9OajBWdVpoOUhveE92WEN4aTdWbW02d29zRHFEWGwzUW14WUc1OGhDK2o5bkZaZU90OApNUDVRWDFUT0pUZU1BZnlEczArVG9RTGNxd1h1MVlWWSt3bFBKZU9JOXU2LzZFSVlLdmtwNXBUQnF1bDZoNmhoCllYejRMUGtCeDlTcmQzT1RhbUkxUUN1T3ZnSHF5bXZVUTNGWWpPbUloK2o2U25VSHloSHZYZ1F0c1U1a0lDMkIKQkc3V09NeUZpWFh3UDN3TmhES3FSYll0M1NFSi9CMFBCR2s0RnhwdGdaZXlPUnlUcVg2K0RWc29NVThxU3psWgpmQjZQUVBrWFdoT1Z4V2hraWlVQ0F3RUFBYU5DTUVBd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0hRWURWUjBPQkJZRUZMZVduM3BxZzZEeXNtZmE3VDcvWVBmL25CaC9NQTBHQ1NxR1NJYjMKRFFFQkN3VUFBNElCQVFCYVNsZlo0N3paTzluTHB1bk45YWRUN253RTkreWpHWW5qUTZpckMwYSt4SDBHNitFYQo1ejlJanpwQjcxQXpPRnJnNmZkU1dPejlNU0JoOXRremhMTXNxNVN1MzU0enpBak14RUFFdXpGSGJoQU5KV2xRCkpxQ0xSeU85YW5sblRtWVFHODl3U0ZsSnY1Qnp3MlI3Yys4MGx6Wmd0Qms4bGxORWd5SVBtMWMwWVJuMTJlWGcKNWFuOUlYbS9hb29sN1ordm11b2pSK0ZDRWp5amduNGtjSC85UXFLaThxNkY1WjNUcmJBOUZTQzE0RW13ZGIrdwpOZEdoa1JZWW1hcEJmZHduY0pCaW1iU1pMVzh2cjRPMzNQMG1EVFVrSGl0YkFJU2ZQMjAzMEtIZnhRdFRtQWFXCmF0Y05xaUZ3WWRSaTFHbUY0QkFJTGRxVE9OMW1XRkFseHEybwotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
     server: https://8221FB5FF3DEE3F05D5141AC2C2FAF9D.sk1.eu-west-1.eks.amazonaws.com
   name: arn:aws:eks:eu-west-1:776004612361:cluster/eks-test
+- cluster:
+    certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUM1ekNDQWMrZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJeU1EUXlOVEV3TXpZMU0xb1hEVE15TURReU1qRXdNelkxTTFvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTGZjCmM4dTRyMWFxa3poczM0ckxMZE9IVkxhV1JMWnJ0TVd1SXFHeHdIYlM1dGdkd204aHYrSEsvRFFMZGZKbEVES3MKQ3lDcGxLR0dMUGVKdGxpTXdOY0VtMWREam9PNDhmajZhaEhXbERRSXluUUVhVm8zTStFeEh3SkNXVVZWaERhTwozTi9ZN3Z5NUxXckZ0UXIyZTFIbkMyLzJ4S2dhMmRETGRUVnIzWVpnVUhINEp5Y3hoRFU4cDBwSEY2cXhEMGYvClFtWXg4OUowU3I1MmxBUUdiRGlLVjNyQ0NwWHNsenFUNmxpcWQ4N2I2cEZUeTROaWdyVEhwMk9WR0dEZWlkRjAKcU1yV2dtSmt1L2hqYnVHT0J5RGM2SDZESXdNTFhlbllPZmZXemdlbGI1VTBLcGRXOUJlTmV6emwyeHNPUFNFSwpQWGJpMGxoRmFSTUNua1pQYTMwQ0F3RUFBYU5DTUVBd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0hRWURWUjBPQkJZRUZEREwvaUY5SGtNT3lFa1dxVG1TazlTU1p2SWdNQTBHQ1NxR1NJYjMKRFFFQkN3VUFBNElCQVFBcEtrN1lHNW9xTHhNbkNwcDNYNWpFVUc3SFAxNnBWcWgzWTNUa0pFbHlneGVpVThuRAo3MzVseFRaOEMwNWVUQkxSR0RxbUdvaHhJcDBITXgwMVoxUWFCaTlINnJteE0vUnRud0ZzRXcrZnBqaVlkVkZSCjBSREF5QVVaUVJWbDF5bFJ6dlhOQjZ5VGVMMWozdUlOMVl3bjAvblpIZlhjVEpWZEh2VnVIRnBFRUE0RHN1SjcKcHJ1T0dSSFFDN0trVU1zbUlrbWlHK2xpSkhDMUx2MGJ5LzJUQnJ3Y3kvVlYxRVB6MXUzSXVJYmx2OEpkaXBnNwo2VktabGg5b2I5amJwWGRTZWFhdXMvS3FyNXRaVW9VZW50Wmc3cGJuaFEyZWRpK1ZvZlJSU25xbXNObERZMUQzCkdrdkJISmZTOGNCY2VvN3BTODE0SmVBWUtlaWs4VFo2SnQzZwotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+    server: https://522150B79EC247DDDE9301DECC7CD24D.gr7.eu-west-1.eks.amazonaws.com
+  name: arn:aws:eks:eu-west-1:908167193459:cluster/eks-stg
 contexts:
 - context:
     cluster: arn:aws:eks:eu-west-1:776004612361:cluster/eks-dev
-    user: change-dev
+    namespace: kube-system
+    user: change-user
   name: eks-dev
+- context:
+    cluster: arn:aws:eks:eu-west-1:908167193459:cluster/eks-stg
+    user: change-stg
+  name: eks-stg
 - context:
     cluster: arn:aws:eks:eu-west-1:776004612361:cluster/eks-test
     user: change-test
   name: eks-test
-current-context: eks-dev
+current-context: eks-stg
 kind: Config
 preferences: {}
 users:
-- name: change-dev
+- name: change-stg
   user:
     exec:
       apiVersion: client.authentication.k8s.io/v1alpha1
@@ -148,11 +157,11 @@ users:
       - eks
       - get-token
       - --cluster-name
-      - eks-dev
+      - eks-stg
       command: aws
       env:
       - name: AWS_PROFILE
-        value: change-dev
+        value: change-stg
       interactiveMode: IfAvailable
       provideClusterInfo: false
 - name: change-test
@@ -172,6 +181,24 @@ users:
         value: change-dev
       interactiveMode: IfAvailable
       provideClusterInfo: false
+- name: change-user
+  user:
+    exec:
+      apiVersion: client.authentication.k8s.io/v1alpha1
+      args:
+      - --region
+      - eu-west-1
+      - eks
+      - get-token
+      - --cluster-name
+      - eks-dev
+      command: aws
+      env:
+      - name: AWS_PROFILE
+        value: change-dev
+      interactiveMode: IfAvailable
+      provideClusterInfo: false
+
 
 EOF
 
