@@ -21,7 +21,7 @@ sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.
 
 echo Update .zshrc ...
 
-cat << EOF >> ~/.zshrc
+grep o-aws ~/.zshrc || cat << EOF >> ~/.zshrc
 
 alias o-aws="okta-awscli -f"
 alias o-aws-dev="okta-awscli -o default -p change-dev -f"
@@ -68,11 +68,11 @@ base-url = changeinvest.okta.com
 app-link = https://changeinvest.okta.com/home/amazon_aws/0oa40xjarcRdnOQnx5d7/272
 duration = 28800
 
-#[prod]
-#username = _user_
-#base-url = changeinvest.okta.com
-#app-link = https://changeinvest.okta.com/home/amazon_aws/0oa40xjarcRdnOQnx5d7/272
-#duration = 28800
+[prod]
+username = _user_
+base-url = changeinvest.okta.com
+app-link = https://changeinvest.okta.com/home/amazon_aws/0oa48dpwmrP21GoHV5d7/272
+duration = 28800
 
 EOF
 OKTA_EMAIL=$(echo $OKTA_EMAIL | sed 's/\@/\\\@/g')
@@ -118,6 +118,10 @@ cat << EOF > ~/.kube/config
 apiVersion: v1
 clusters:
 - cluster:
+    certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUM1ekNDQWMrZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJeU1EVXdPVEUwTURFeE1Gb1hEVE15TURVd05qRTBNREV4TUZvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTkJaCkFwQ2ptbGNKb2tOejQ2TzQ3REp5T09MRUdDTnNFckUrQ01qOTJSaTV2WXZoMHkranhIaE53cG85cjR6Mi9qY3cKWVNpQURuc0tFUmwxeTh4ZCtjYzF4cTMyYnVpaDg5TXQwNFFLdFU0YTRRVlQzOG9rY21JdExLeEsrVkp0ODhVYQpxaUVXbXNwRGVxcnc4MUNRWS9VYW9ZcFNsbGJwL1NTdFlub1BiZEgyMkR0NHVhWXFvZGphbnJmaWhUb3BYVWE3ClVzdklIWEdtS1RkMktLdk1jWmtPdFpnUk5DWUJGUWpSQzluU1JENGhIdWs3dTd5VFY2TTk1bHo0MGQza3FlUGwKVkpWNHNJNGdLbE1QS0Y2K25KSW1odUZHM0Jlb2RCUHZZeWJjWmpjM3luM3h4TWkwbGp3eElnQU9td2FOUFlmegp4UWFTTUVmbi9Lbm1zSVR2V0prQ0F3RUFBYU5DTUVBd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0hRWURWUjBPQkJZRUZKcUJ2bU0rQ09QWUZwQy85Y2Y1TnlFYTFiMWpNQTBHQ1NxR1NJYjMKRFFFQkN3VUFBNElCQVFCaGFUWDF5VXViSU91TzhHS0s2VzFnbnhIaStaa2NKZ0YrV1BEQk1MekpGV1ZiV2ZDSgpVRnZDUjdpRkJkTktESmJWSUNHQm1VczcrL0EraHdNTXVtLzRoRXBqVVV2NnRwMVdCY0ZDZ2VOVGlNbGdTYjZmCnBmNUZ0MTRKMjRraXdWSWZSRXVtZW1ib3E5WEg1N2wxcWV5bEJHMU1OdGFWSGE3SVJVTU5UTXJkcjNMemU3VUcKYVBsWHNjOW4xZE1pWmVtTEM1T2JpSndoOUYrVFpQdDVwbDlZbTVXTDlFRm41WVIyYU5iZVZiWEtWeEEyNmtxKwpueG8zQVB0YXlwaVhxdHUraUd2c1dobElYQy9DdkZjdW5hTnJjdk1MSGxlT0QxazV4SnZweEpMQWVUOXZvL2NwCnozQlE2alJYaWVjRTZlaWNxNWNLL2Flc29Rd0oyaCs2TGJ6WgotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+    server: https://4EBDC09EDBB51E6DD439781C09430842.gr7.eu-west-1.eks.amazonaws.com
+  name: arn:aws:eks:eu-west-1:545659691938:cluster/eks-prod
+- cluster:
     certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUM1ekNDQWMrZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJeU1ETXhPREE0TkRVME0xb1hEVE15TURNeE5UQTRORFUwTTFvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTkNwCmFaalY0Wk5XOHJPdHVQejMyVFdYVGdNbS9aVlArZ25iQ01DNFRhUVp5czh0TUladXBOS1pvV2hqd3F2Vm91NTQKZHZzbVF3WVFpTmdGSWpVdDZxTTBCSWloWE5pVkNjMUN6OXovYjZ3TTZDQVJUZjhxWnpNMXluc0tFbGZFU3luSAo2REsxUWJadXpyZEs2V3FXZDVDSWlzbjVVQmVTOWQwZEZQL2tvTlQ0NzY2Zk9QQzRYcFdULzArU0FxUUg5c3dtCndzanB3RTkwcUlMcDZGQ0RsK1Z1cTg5ZDZraUp1TkJ5OHcyUHV0WE95aUdJczFJaTBHNmtCSUVSM1VUck43Qy8KczMvZGVrWklmWVpQZzI2UjNuNkM4Wjl1N2V1dVBXdzREejJJMDI3a09oY0l1dEJmMW05MkFXbzJsTU0rb0lXOApibkhkYXdMRTZWTHpERFFZdi9zQ0F3RUFBYU5DTUVBd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0hRWURWUjBPQkJZRUZDOWpRaGJHZUs0QTlkNjF4ZDdLRnhlNm03bWNNQTBHQ1NxR1NJYjMKRFFFQkN3VUFBNElCQVFEQk5TdHRiL3RsVFlhclA0V0YxNzZ4a3ZONG5OOUFQejBDOFZhaGs0d2xFaXFmNEVQMgpORXhQTHM2dXRZdTRvKzBqaWF3YUtPOTFrTUE2Q2VWUVFZQURtWHdsWmRKV3hRanp6aFdLOEhRb3lyd3JWL0FpCks2cE5sS2NVR0pmdHcyWTBNTEIzNmhMTytZZS9IVWlyZHhsamp5Z05FOTZoRU5XRHVyQVI5aTJCRTBRUWQwUkMKUm1xSDlNejVmT0c1N2d0dVZiMFVUSDl6Y2Q3a2ZnNHdpanRtM3c5SHZpd3BXSC82UE1BK3R0V1ZmSWQ3aUZmOQpGamV6VnZ6UDVPNThXNlQ1V3d5QkFJWmwyc3oxZDJFK1JHS0hmNi83R280TzBCOWVpbDV3NWlKcS9FcGt6MlV6CjM4bVVsNkU5VzZOSWlMUGVTdFV4bXFaRTRTRVFZVEwyYkRDdgotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
     server: https://BFF3D5E4FE34BF0E1457C926D27842EB.sk1.eu-west-1.eks.amazonaws.com
   name: arn:aws:eks:eu-west-1:776004612361:cluster/eks-dev
@@ -136,6 +140,10 @@ contexts:
     user: change-user
   name: eks-dev
 - context:
+    cluster: arn:aws:eks:eu-west-1:545659691938:cluster/eks-prod
+    user: change-prod
+  name: eks-prod
+- context:
     cluster: arn:aws:eks:eu-west-1:908167193459:cluster/eks-stg
     user: change-stg
   name: eks-stg
@@ -147,10 +155,27 @@ current-context: eks-stg
 kind: Config
 preferences: {}
 users:
+- name: change-prod
+  user:
+    exec:
+      apiVersion: client.authentication.k8s.io/v1beta1
+      args:
+      - --region
+      - eu-west-1
+      - eks
+      - get-token
+      - --cluster-name
+      - eks-prod
+      command: aws
+      env:
+      - name: AWS_PROFILE
+        value: change-prod
+      interactiveMode: IfAvailable
+      provideClusterInfo: false
 - name: change-stg
   user:
     exec:
-      apiVersion: client.authentication.k8s.io/v1alpha1
+      apiVersion: client.authentication.k8s.io/v1beta1
       args:
       - --region
       - eu-west-1
@@ -167,7 +192,7 @@ users:
 - name: change-test
   user:
     exec:
-      apiVersion: client.authentication.k8s.io/v1alpha1
+      apiVersion: client.authentication.k8s.io/v1beta1
       args:
       - --region
       - eu-west-1
@@ -184,7 +209,7 @@ users:
 - name: change-user
   user:
     exec:
-      apiVersion: client.authentication.k8s.io/v1alpha1
+      apiVersion: client.authentication.k8s.io/v1beta1
       args:
       - --region
       - eu-west-1
@@ -199,10 +224,9 @@ users:
       interactiveMode: IfAvailable
       provideClusterInfo: false
 
-
 EOF
 
 
 echo Please run source ~/.zshrc
-echo Then use o-aws-dev to login to change-dev account, 
-echo o-aws-stg to change-stg account, and o-aws-prod to change-prod accounts
+echo Then use o-aws-dev to login to change-dev account,
+echo o-aws-stg to login to change-stg account, and o-aws-prod to login to change-prod accounts
