@@ -62,8 +62,8 @@ def get_credentials(aws_auth, okta_profile, profile,
             cache.close()
         sys.exit(0)
     else:
-        aws_auth.write_sts_token(access_key_id,
-                                 secret_access_key, session_token)
+        aws_auth.write_sts_token(access_key_id, secret_access_key,
+                                 session_token_expiry, session_token)
 
 
 def console_output(access_key_id, secret_access_key, session_token, verbose):
@@ -133,7 +133,7 @@ def main(okta_profile, profile, verbose, version,
         okta_profile = okta_switch(logger)
 
     aws_auth = AwsAuth(profile, okta_profile, lookup, verbose, logger)
-    if not aws_auth.check_sts_token() or force:
+    if force or not aws_auth.check_sts_token():
         if force and profile:
 
             logger.info("Force option selected, \

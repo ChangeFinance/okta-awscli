@@ -8,7 +8,7 @@ from collections import namedtuple
 from configparser import RawConfigParser
 from enum import Enum
 import boto3
-from botocore.exceptions import ClientError
+from botocore.exceptions import ClientError, NoCredentialsError
 from subprocess import call
 
 
@@ -22,8 +22,13 @@ class AwsAuth():
 
     def __init__(self, profile, okta_profile, lookup, verbose, logger):
         home_dir = os.path.expanduser('~')
-        self.creds_dir = home_dir + "/.aws"
-        self.creds_file = self.creds_dir + "/credentials"
+        shared_credentials_file = os.getenv("AWS_SHARED_CREDENTIALS_FILE")
+        if shared_credentials_file:
+            self.creds_dir = os.path.dirname(shared_credentials_file)
+            self.creds_file = shared_credentials_file
+        else:
+            self.creds_dir = home_dir + "/.aws"
+            self.creds_file = self.creds_dir + "/credentials"
         self.lookup = lookup
         self.profile = profile
         self.verbose = verbose
@@ -146,7 +151,10 @@ of roles assigned to you.""" % self.role)
             else:
                 # See https://docs.aws.amazon.com/STS/latest/APIReference/CommonErrors.html
                 self.logger.info("An unhandled error occurred. Requesting new credentials.")
+            return False
 
+        except NoCredentialsError:
+            self.logger.info('No credentials found. Requesting new credentials.')
             return False
 
         self.logger.info("STS credentials are valid. Nothing to do.")
@@ -154,7 +162,7 @@ of roles assigned to you.""" % self.role)
 
         return True
 
-    def write_sts_token(self, access_key_id, secret_access_key, session_token):
+    def write_sts_token(self, access_key_id, secret_access_key, session_token_expiry, session_token):
         """ Writes STS auth information to credentials file """
         if not os.path.exists(self.creds_dir):
             os.makedirs(self.creds_dir)
@@ -168,6 +176,7 @@ of roles assigned to you.""" % self.role)
 
         config.set(self.profile, 'aws_access_key_id', access_key_id)
         config.set(self.profile, 'aws_secret_access_key', secret_access_key)
+        config.set(self.profile, 'aws_session_expiration', session_token_expiry)
         config.set(self.profile, 'aws_session_token', session_token)
 
         with open(self.creds_file, 'w+') as configfile:

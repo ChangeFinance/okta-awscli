@@ -4,9 +4,9 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [packages]
-requests = "==2.27.1"
+requests = "==2.32.*"
 click = "==7.0"
-bs4 = "==0.0.1"
+beautifulsoup4 = "==4.11.1"
 boto3 = "==1.21.22"
 configparser = "==3.5.0"
 validators = "==0.11.2"
@@ -14,3 +14,4 @@ okta-awscli = {path = "."}
 
 [dev-packages]
 pylint = "*"
+tomli = "*"

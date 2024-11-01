@@ -8,12 +8,10 @@ import requests
 from bs4 import BeautifulSoup as bs
 from oktaawscli.okta_auth_mfa_base import OktaAuthMfaBase
 from oktaawscli.okta_auth_mfa_app import OktaAuthMfaApp
-from oktaawscli.util import input
-
 
 class OktaAuth():
     """ Handles auth to Okta and returns SAML assertion """
-    def __init__(self, okta_profile, verbose, logger, totp_token, 
+    def __init__(self, okta_profile, verbose, logger, totp_token,
         okta_auth_config, username, password, verify_ssl=True):
 
         self.okta_profile = okta_profile
@@ -57,21 +55,24 @@ class OktaAuth():
                 state_token = resp_json['stateToken']
                 mfa_base = OktaAuthMfaBase(self.logger, state_token, self.factor, self.totp_token)
                 session_token = mfa_base.verify_mfa(factors_list)
+                return session_token
             elif resp_json['status'] == 'SUCCESS':
                 session_token = resp_json['sessionToken']
+                return session_token
             elif resp_json['status'] == 'MFA_ENROLL':
                 self.logger.warning("""MFA not enrolled. Cannot continue.
 Please enroll an MFA factor in the Okta Web UI first!""")
                 sys.exit(2)
+            elif resp_json['status'] == 'LOCKED_OUT':
+                self.logger.error("""Account is locked. Cannot continue.
+Please contact you administrator in order to unlock the account!""")
+                sys.exit(1)
         elif resp.status_code != 200:
             self.logger.error(resp_json['errorSummary'])
             sys.exit(1)
         else:
             self.logger.error(resp_json)
             sys.exit(1)
-
-
-        return session_token
 
 
     def get_session(self, session_token):
@@ -125,12 +126,19 @@ Please enroll an MFA factor in the Okta Web UI first!""")
         if hasattr(soup.title, 'string') and re.match(".* - Extra Verification$", soup.title.string):
             state_token = decode(re.search(r"var stateToken = '(.*)';", html.text).group(1), "unicode-escape")
         else:
-            self.logger.error("No Extra Verification")
+            self.logger.error(f"No Extra Verification. Title was {soup.title}")
             return None
 
         self.session.cookies['oktaStateToken'] = state_token
 
-        mfa_app = OktaAuthMfaApp(self.logger, self.session, self.verify_ssl, self.auth_url)
+        mfa_app = OktaAuthMfaApp(
+            self.logger,
+            self.session,
+            self.verify_ssl,
+            self.auth_url,
+            self.factor,
+            self.totp_token
+        )
         api_response = mfa_app.stepup_auth(self.auth_url, state_token)
         resp = self.session.get(self.app_link)
 
@@ -141,8 +149,8 @@ Please enroll an MFA factor in the Okta Web UI first!""")
         """ Returns the SAML assertion from HTML """
         assertion = self.get_simple_assertion(html) or self.get_mfa_assertion(html)
 
-        if not assertion:
-            self.logger.error("SAML assertion not valid: " + assertion)
+        if assertion is None:
+            self.logger.error("SAML assertion not valid")
             sys.exit(-1)
         return assertion
 

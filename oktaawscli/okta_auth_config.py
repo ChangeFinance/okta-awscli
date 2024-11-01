@@ -8,8 +8,6 @@ from getpass import getpass
 import validators
 
 
-from oktaawscli.util import input
-
 class OktaAuthConfig():
     """ Config helper class """
     def __init__(self, logger):
@@ -26,12 +24,10 @@ class OktaAuthConfig():
             value.read(config_path)
             print(f"You have preconfigured Okta profiles: {value.sections()}")
             print(f"This command will append new profile to the existing {config_path} config file")
-            confirm = input('Would you like to proceed? [y/n]: ')
-            append = True
         else:
             print(f"This command will create a new {config_path} config file")
-            confirm = input('Would you like to proceed? [y/n]: ')
 
+        confirm = input('Would you like to proceed? [y/n]: ')
         if confirm == 'y':
             logger.info(f"Creating new {config_path} file")
             okta_profile = input('Enter Okta profile name: ')
@@ -53,13 +49,10 @@ class OktaAuthConfig():
                 value.set(okta_profile, 'app-link', app_link)
             value.set(okta_profile, 'duration', duration)
 
-            if append:
-                with open(config_path, 'a') as configfile:
-                    value.write(configfile)
-            else:
-                with open(config_path, 'w+') as configfile:
-                    value.write(configfile)
-            print(f"File {config_path} successfully created. Now you can authenticate to Okta")
+            with open(config_path, 'w') as configfile:
+                value.write(configfile)
+
+            print(f"Configuration {config_path} successfully updated. Now you can authenticate to Okta")
             print(f"Execute 'okta-awscli -o {okta_profile} -p {profile} sts get-caller-identity' to authenticate and retrieve credentials")
             sys.exit(0)
         else:
@@ -110,6 +103,9 @@ class OktaAuthConfig():
         if self._value.has_option(okta_profile, 'username'):
             username = self._value.get(okta_profile, 'username')
             self.logger.info("Authenticating as: %s" % username)
+        elif self._value.has_option('default', 'username'):
+            username = self._value.get('default', 'username')
+            self.logger.info("Authenticating as: %s" % username)
         else:
             username = input('Enter username: ')
         return username
@@ -118,6 +114,8 @@ class OktaAuthConfig():
         """ Gets password from config """
         if self._value.has_option(okta_profile, 'password'):
             password = self._value.get(okta_profile, 'password')
+        elif self._value.has_option('default', 'password'):
+            password = self._value.get('default', 'password')
         else:
             password = getpass('Enter password: ')
         return password
@@ -128,15 +126,27 @@ class OktaAuthConfig():
             factor = self._value.get(okta_profile, 'factor')
             self.logger.debug("Setting MFA factor to %s" % factor)
             return factor
+        elif self._value.has_option('default', 'factor'):
+            factor = self._value.get('default', 'factor')
+            self.logger.debug("Setting MFA factor to %s from default" % factor)
+            return factor
         return None
 
     def duration_for(self, okta_profile):
         """ Gets requested duration from config, ignore it on failure """
+        duration = None
         if self._value.has_option(okta_profile, 'duration'):
             duration = self._value.get(okta_profile, 'duration')
             self.logger.debug(
                 "Requesting a duration of %s seconds" % duration
             )
+        elif self._value.has_option('default', 'duration'):
+            duration = self._value.get('default', 'duration')
+            self.logger.debug(
+                "Requesting a duration of %s seconds from default" % duration
+            )
+
+        if duration is not None:
             try:
                 return int(duration)
             except ValueError:
@@ -144,6 +154,7 @@ class OktaAuthConfig():
                     "Duration could not be converted to a number,"
                     " ignoring."
                 )
+
         return None
 
     def write_role_to_profile(self, okta_profile, role_arn):

@@ -36,6 +36,11 @@ class OktaAuthMfaBase():
                                    key=lambda factor: (
                                        factor['provider'],
                                        factor['factorType']))
+
+        if self.factor and not self.factor in [factor['provider'] for factor in supported_factors]:
+            self.logger.error("Unable to locate selected factor type {}".format(self.factor))
+            sys.exit(1)
+
         if len(supported_factors) == 1:
             session_token = self._verify_single_factor(supported_factors[0])
         elif len(supported_factors) > 0:
@@ -97,6 +102,7 @@ class OktaAuthMfaBase():
                 return resp_json['sessionToken']
             elif resp_json['status'] == "MFA_CHALLENGE" and factor['factorType'] !='u2f':
                 print("Waiting for push verification...")
+                correct_answer_shown = False
                 while True:
                     resp = requests.post(
                         resp_json['_links']['next']['href'], json=req_data)
@@ -113,6 +119,14 @@ class OktaAuthMfaBase():
                         print("Verification was rejected")
                         sys.exit(1)
                     else:
+                        if not correct_answer_shown:
+                            try:
+                                correct_answer = resp_json['_embedded']['factor']['_embedded']['challenge']['correctAnswer']
+                                if correct_answer:
+                                    print(f'On your phone, tap {correct_answer} in the Okta Verify app')
+                                    correct_answer_shown = True
+                            except KeyError:
+                                pass
                         time.sleep(0.5)
 
             if factor['factorType'] == 'u2f':
